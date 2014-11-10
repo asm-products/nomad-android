@@ -13,6 +13,8 @@ Copy `app/src/main/res/values/api_keys.xml-sample` to `app/src/main/res/values/a
 
 ## Building
 
+Requires Java 8
+
 ### Android Studio
 
 Clone the sourcecode.

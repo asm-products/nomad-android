@@ -4,6 +4,13 @@
 
 This is a product being built by the Assembly community. You can help push this idea forward by visiting [https://assembly.com/nomad](https://assembly.com/nomad).
 
+## Setup
+
+1. Sign up for a Google Places API Key by following these instructions:
+[https://developers.google.com/places/documentation/#Authentication](https://developers.google.com/places/documentation/#Authentication)
+
+Copy `app/src/main/res/values/api_keys.xml-sample` to `app/src/main/res/values/api_keys.xml` and copy your API key to `google_places_api_key` and uncomment the line.
+
 ## Building
 
 ### Android Studio

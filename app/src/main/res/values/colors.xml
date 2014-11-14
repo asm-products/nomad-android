@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nomad_dark_red">#8d1924</color>
+    <color name="nomad_light_red">#ed2638</color>
+    <color name="nomad_red">#db232f</color>
+    <color name="nomad_shadow_red">#ad1f2d</color>
+</resources>

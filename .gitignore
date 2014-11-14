@@ -45,3 +45,6 @@ mirror/
 
 # Other
 signing.properties
+
+# Api Keys xml file
+app/src/main/res/values/api_keys.xml

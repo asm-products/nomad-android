@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Copy this file to api_keys.xml and set your API keys in that file -->
+    <!-- so that they won't be commited to source control -->
+
+    <!--<string name="google_places_api_key"></string>-->
+
+</resources>

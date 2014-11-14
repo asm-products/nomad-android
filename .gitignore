@@ -46,3 +46,7 @@ signing.properties
 
 # Api Keys xml file
 app/src/main/res/values/api_keys.xml
+
+# Crashlytics
+app/src/main/assets/crashlytics-build.properties
+app/crashlytics.properties

@@ -14,16 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import nmd.nomad.holdr.Holdr_ActivityMain;
-import nmd.nomad.holdr.Holdr_RowPlace;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import io.fabric.sdk.android.Fabric;
 import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import rx.Observable;
 import rx.Subscriber;
@@ -41,19 +46,31 @@ public class MainActivity extends ActionBarActivity {
 
     private static final int REQUEST_CODE_RECOVER_GOOGLE_PLAY_SERVICES = 364783;
     private GooglePlaces googlePlacesClient;
-    private Holdr_ActivityMain holdr;
     private Subscription automaticSearchingSubscription;
     private PublishSubject<Observable<String>> searchTextEmitterSubject;
+
+    @InjectView(R.id.list)
+    RecyclerView list;
+
+    @InjectView(R.id.progress_layout)
+    View progressLayout;
+
+    @InjectView(R.id.places_search)
+    EditText placesSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (BuildConfig.USE_CRASHLYTICS) {
+            Fabric.with(this, new Crashlytics());
+        }
+
+        ButterKnife.inject(this);
+
         // TODO inject with Dagger
         googlePlacesClient = new GooglePlaces(getString(R.string.google_places_api_key));
-
-        holdr = new Holdr_ActivityMain(findViewById(android.R.id.content));
 
         setupList();
         setupAutomaticSearching();
@@ -145,7 +162,7 @@ public class MainActivity extends ActionBarActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(s -> getPlacePredictions(s));
 
-        holdr.placesSearch.addTextChangedListener(new TextWatcher() {
+        placesSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -164,8 +181,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setupList() {
-        holdr.list.setHasFixedSize(true);
-        holdr.list.setLayoutManager(new LinearLayoutManager(this));
+        list.setHasFixedSize(true);
+        list.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void getPlacePredictions(String searchQuery) {
@@ -190,6 +207,7 @@ public class MainActivity extends ActionBarActivity {
                             ArrayList<String> noResultsList = new ArrayList<>();
                             noResultsList.add("No results");
                             showNamesInList(noResultsList);
+                            hideProgress();
                         });
     }
 
@@ -222,17 +240,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void showProgress() {
-        holdr.progressLayout.setVisibility(View.VISIBLE);
-        holdr.list.setVisibility(View.GONE);
+        progressLayout.setVisibility(View.VISIBLE);
+        list.setVisibility(View.GONE);
     }
 
     private void hideProgress() {
-        holdr.progressLayout.setVisibility(View.GONE);
-        holdr.list.setVisibility(View.VISIBLE);
+        progressLayout.setVisibility(View.GONE);
+        list.setVisibility(View.VISIBLE);
     }
 
     private void showNamesInList(List<String> names) {
-        holdr.list.setAdapter(new NamesAdapter(names));
+        list.setAdapter(new NamesAdapter(names));
         hideProgress();
     }
 
@@ -255,7 +273,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            viewHolder.holdr.title.setText(names.get(i));
+            viewHolder.title.setText(names.get(i));
         }
 
         @Override
@@ -265,11 +283,11 @@ public class MainActivity extends ActionBarActivity {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
 
-            public Holdr_RowPlace holdr;
+            TextView title;
 
             public ViewHolder(View v) {
                 super(v);
-                holdr = new Holdr_RowPlace(v);
+                title = (TextView) v.findViewById(R.id.title);
             }
         }
     }

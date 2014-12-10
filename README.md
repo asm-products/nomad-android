@@ -17,6 +17,8 @@ Requires Java 8
 
 ### Android Studio
 
+Currently requires Android Studio 1.0 or newer.
+
 Clone the sourcecode.
 
 File > Import Project... > Select "/nomad-android/settings.gradle"

@@ -20,11 +20,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="nmd.nomad.GooglePlacesApiActivity"
+            android:label="@string/title_activity_google_places_api">
+        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
-        <meta-data android:name="com.crashlytics.ApiKey" android:value="7ea27bd18711ec5b842757b3ac0d1630727d265e"/>
-
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="7ea27bd18711ec5b842757b3ac0d1630727d265e"/>
     </application>
 
 </manifest>

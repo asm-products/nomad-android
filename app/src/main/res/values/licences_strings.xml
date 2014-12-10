@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="define_int_google_places_api_java"></string>
+    <!-- Author section -->
+    <string name="library_google_places_api_java_author">Walker Crouse</string>
+    <string name="library_google_places_api_java_authorWebsite">http://walkercrou.se</string>
+    <!-- Library section -->
+    <string name="library_google_places_api_java_libraryName">google-places-api-java</string>
+    <string name="library_google_places_api_java_libraryDescription">Comprehensive and FULL Java client for the Google Places API</string>
+    <string name="library_google_places_api_java_libraryWebsite"></string>
+    <string name="library_google_places_api_java_libraryVersion">1.2.6</string>
+    <!-- OpenSource section -->
+    <string name="library_google_places_api_java_isOpenSource">true</string>
+    <string name="library_google_places_api_java_repositoryLink">https://github.com/windy1/google-places-api-java</string>
+    <!-- ClassPath for autoDetect section -->
+    <string name="library_google_places_api_java_classPath">se.walkercrou.places.GooglePlaces</string>
+    <!-- License section -->
+    <string name="library_google_places_api_java_licenseId">mit</string>
+    <!-- Custom variables section -->
+</resources>

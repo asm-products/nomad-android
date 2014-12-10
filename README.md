@@ -15,6 +15,8 @@ Copy `app/src/main/res/values/api_keys.xml-sample` to `app/src/main/res/values/a
 
 Requires Java 8
 
+Ensure you have installed the latest versions of "Android Support Library", "Android Support Repository", "Google Play Services" and "Google Repository" from the Android SDK Manager.
+
 ### Android Studio
 
 Currently requires Android Studio 1.0 or newer.

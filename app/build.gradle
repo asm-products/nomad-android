@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 repositories {
-    maven { url 'https://maven.fabric.io/repo' }
+    maven { url 'https://maven.fabric.io/public' }
 }
 
 apply plugin: 'retrolambda'
@@ -12,7 +12,7 @@ apply plugin: 'com.github.ben-manes.versions'
 buildscript {
     repositories {
         jcenter()
-        maven { url 'https://maven.fabric.io/repo' }
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {

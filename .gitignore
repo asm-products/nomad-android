@@ -50,3 +50,4 @@ app/src/main/res/values/api_keys.xml
 # Crashlytics
 app/src/main/assets/crashlytics-build.properties
 app/crashlytics.properties
+app/src/main/res/values/com_crashlytics_export_strings.xml

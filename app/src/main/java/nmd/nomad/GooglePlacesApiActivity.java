@@ -29,7 +29,7 @@ import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
@@ -94,7 +94,7 @@ public class GooglePlacesApiActivity extends ActionBarActivity {
     private void setupAutomaticSearching() {
         // Use RXJava debounce to avoid calling API until user stops typing
         searchTextEmitterSubject = PublishSubject.create();
-        automaticSearchingSubscription = AndroidObservable.bindActivity(GooglePlacesApiActivity.this,
+        automaticSearchingSubscription = AppObservable.bindActivity(GooglePlacesApiActivity.this,
                 Observable.switchOnNext(searchTextEmitterSubject))
                 .debounce(400, TimeUnit.MILLISECONDS, Schedulers.io())
                 .subscribeOn(Schedulers.io())
@@ -136,7 +136,7 @@ public class GooglePlacesApiActivity extends ActionBarActivity {
             }
             subscriber.onCompleted();
         });
-        AndroidObservable.bindActivity(this, observable)
+        AppObservable.bindActivity(this, observable)
                 .subscribeOn(Schedulers.io())
                 .flatMap(s -> Observable.from(s))
                 .map(prediction -> prediction.getDescription())
@@ -162,7 +162,7 @@ public class GooglePlacesApiActivity extends ActionBarActivity {
             }
             subscriber.onCompleted();
         });
-        AndroidObservable.bindActivity(this, observable)
+        AppObservable.bindActivity(this, observable)
                 .subscribeOn(Schedulers.io())
                 .flatMap(s -> Observable.from(s))
                 .map(place -> place.getName())

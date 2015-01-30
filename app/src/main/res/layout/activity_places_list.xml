@@ -9,9 +9,31 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"/>
+
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/placesListView"
         android:visibility="gone"></ListView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/noPlaceFound"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/abc_text_size_medium_material"
+            android:gravity="center"
+            android:padding="32dp"
+            android:text="Oh no...There is no place around you yet :(" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add a new Place" />
+    </LinearLayout>
+
 </RelativeLayout>

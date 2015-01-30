@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,7 @@ public class PlacesListActivity extends ActionBarActivity {
         // Set the listView and the adapter
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         ListView listView = (ListView) findViewById(R.id.placesListView);
+        LinearLayout noPlaceFound = (LinearLayout) findViewById(R.id.noPlaceFound);
         final ArrayList<Place> placeList = new ArrayList<Place>();
         final PlacesListArrayAdapter arrayAdapter = new PlacesListArrayAdapter(this, placeList);
         listView.setAdapter(arrayAdapter);
@@ -40,13 +43,18 @@ public class PlacesListActivity extends ActionBarActivity {
         final Callback callback = new Callback() {
             @Override
             public void success(Object object, Response response) {
-                listView.setVisibility(View.VISIBLE);
+                ArrayList<Place> places = (ArrayList<Place>) object;
                 progressBar.setVisibility(View.GONE);
 
-                arrayAdapter.clear();
-                arrayAdapter.addAll((ArrayList<Place>) object);
-                for (Place place : placeList) {
-                    System.out.println(place.toString());
+                if(places.isEmpty()) {
+                    noPlaceFound.setVisibility(View.VISIBLE);
+                } else {
+                    listView.setVisibility(View.VISIBLE);
+                    arrayAdapter.clear();
+                    arrayAdapter.addAll(places);
+                    for (Place place : places) {
+                        System.out.println(place.toString());
+                    }
                 }
             }
 

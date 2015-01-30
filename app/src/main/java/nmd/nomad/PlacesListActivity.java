@@ -8,7 +8,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class PlacesListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_places_list);
 
         // Set the listView and the adapter
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         ListView listView = (ListView) findViewById(R.id.placesListView);
         final ArrayList<Place> placeList = new ArrayList<Place>();
         final PlacesListArrayAdapter arrayAdapter = new PlacesListArrayAdapter(this, placeList);
@@ -37,6 +40,9 @@ public class PlacesListActivity extends ActionBarActivity {
         final Callback callback = new Callback() {
             @Override
             public void success(Object object, Response response) {
+                listView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+
                 arrayAdapter.clear();
                 arrayAdapter.addAll((ArrayList<Place>) object);
                 for (Place place : placeList) {
@@ -56,7 +62,7 @@ public class PlacesListActivity extends ActionBarActivity {
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 System.out.println(location.getLatitude() + ", " + location.getLongitude());
-                String API_URL = "https://asm-nomad-staging.herokuapp.com/api/v1/";
+                String API_URL = getString(R.string.gomad_api_url);
                 GomadClient client = ServiceGenerator.createService(GomadClient.class, API_URL);
                 client.searchPlaces(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), callback);
             }

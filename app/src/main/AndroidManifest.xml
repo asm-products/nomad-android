@@ -27,7 +27,7 @@
             android:value="7ea27bd18711ec5b842757b3ac0d1630727d265e" />
 
         <activity
-            android:name=".PlacesList"
+            android:name=".PlacesListActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

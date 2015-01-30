@@ -8,8 +8,17 @@ public class Place {
     Double lat;
     Double lng;
     String name;
+    Double distance;
 
     public String toString(){
         return name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Double getDistance() {
+        return distance;
     }
 }

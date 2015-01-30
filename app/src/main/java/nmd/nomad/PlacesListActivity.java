@@ -8,13 +8,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import nmd.nomad.R;
+import nmd.nomad.adapters.PlacesListArrayAdapter;
 import nmd.nomad.api.GomadClient;
 import nmd.nomad.api.ServiceGenerator;
 import nmd.nomad.models.Place;
@@ -22,7 +20,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class PlacesList extends ActionBarActivity {
+public class PlacesListActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +30,7 @@ public class PlacesList extends ActionBarActivity {
         // Set the listView and the adapter
         ListView listView = (ListView) findViewById(R.id.placesListView);
         final ArrayList<Place> placeList = new ArrayList<Place>();
-        final ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, placeList);
+        final PlacesListArrayAdapter arrayAdapter = new PlacesListArrayAdapter(this, placeList);
         listView.setAdapter(arrayAdapter);
 
         // Set a callback to fill the listView

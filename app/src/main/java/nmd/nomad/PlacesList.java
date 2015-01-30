@@ -39,6 +39,7 @@ public class PlacesList extends ActionBarActivity {
         final Callback callback = new Callback() {
             @Override
             public void success(Object object, Response response) {
+                arrayAdapter.clear();
                 arrayAdapter.addAll((ArrayList<Place>) object);
                 for (Place place : placeList) {
                     System.out.println(place.toString());

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Gomad</string>
+    <string name="gomad_api_url">https://asm-nomad-staging.herokuapp.com/api/v1/</string>
     <string name="action_settings">Settings</string>
     <string name="action_open_source">Open Source Licences</string>
     <string name="title_activity_google_places_api">Google Places Api Search</string>

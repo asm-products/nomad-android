@@ -47,8 +47,10 @@ public class PlacesListActivity extends ActionBarActivity {
                 progressBar.setVisibility(View.GONE);
 
                 if(places.isEmpty()) {
+                    listView.setVisibility(View.GONE);
                     noPlaceFound.setVisibility(View.VISIBLE);
                 } else {
+                    noPlaceFound.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
                     arrayAdapter.clear();
                     arrayAdapter.addAll(places);

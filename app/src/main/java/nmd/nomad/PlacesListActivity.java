@@ -20,9 +20,11 @@ import nmd.nomad.adapters.PlacesListArrayAdapter;
 import nmd.nomad.api.GomadClient;
 import nmd.nomad.api.ServiceGenerator;
 import nmd.nomad.models.Place;
+import pl.charmas.android.reactivelocation.ReactiveLocationProvider;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import rx.functions.Action1;
 
 public class PlacesListActivity extends ActionBarActivity {
 
@@ -66,26 +68,18 @@ public class PlacesListActivity extends ActionBarActivity {
             }
         };
 
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        ReactiveLocationProvider locationProvider = new ReactiveLocationProvider(this);
 
-        // Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
+        locationProvider.getLastKnownLocation().subscribe(new Action1<Location>() {
+            @Override
+            public void call(Location location) {
                 System.out.println(location.getLatitude() + ", " + location.getLongitude());
                 String API_URL = getString(R.string.gomad_api_url);
                 GomadClient client = ServiceGenerator.createService(GomadClient.class, API_URL);
                 client.searchPlaces(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), callback);
             }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-            public void onProviderEnabled(String provider) {}
-            public void onProviderDisabled(String provider) {}
-        };
-
-        // Register the listener with the Location Manager to receive location updates
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
